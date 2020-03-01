@@ -8,16 +8,21 @@ import { HttpService } from './http.service';
 })
 export class NoteService {
 
+  // variables
   public noteData: any = [];
   public noteItem: any = {};
   public addNewCard: boolean;
 
+  // Dependencies
   constructor(
     public httpService: HttpService
   ) { }
 
+  // remove note data
   removeNote(noteId, index) {
     let self = this;
+
+    // confirm before removing
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will not be able to recover this note!',
@@ -26,6 +31,8 @@ export class NoteService {
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it'
     }).then((result) => {
+
+      // if yes, begin process
       if (result.value) {
         let url = '/note/' + noteId;
         self.httpService.delete(url).then((resp: any) => {
@@ -37,14 +44,10 @@ export class NoteService {
         });
       }
     });
-    // let noteIndex = this.noteData.findIndex(noteItem => noteItem.id == noteId);
-    // if (noteIndex >= 0) {
-    //   this.noteData.splice(noteIndex, 1);
-    // }
   }
 
+  // set note data and display edit item form
   editNote(noteItem) {
-    console.log(noteItem);
     this.noteItem = noteItem;
     this.addNewCard = true;
   }

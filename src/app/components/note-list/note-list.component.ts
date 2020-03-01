@@ -10,15 +10,20 @@ import { debug } from 'util';
 })
 export class NoteListComponent implements OnInit {
 
+  // ref to dom element
   @ViewChild('takeNewNote', { static: false }) takeNewNote: ElementRef;
+
+  // variables
   public form;
   public isSubmitted: boolean;
 
+  // Dependencies
   constructor(
     private fb: FormBuilder,
     public mainService: MainService
   ) { }
 
+  // Angular init life cycle
   ngOnInit() {
     this.initializeNoteData();
     this.createForm();
@@ -26,12 +31,14 @@ export class NoteListComponent implements OnInit {
     this.getNoteData();
   }
 
+  // init data
   initializeNoteData() {
     this.mainService.noteService.noteItem = { title: '', note: '' };
     this.mainService.noteService.addNewCard = false;
     this.isSubmitted = false;
   }
 
+  // create reactive form
   createForm() {
     this.form = this.fb.group({
       title: ['', Validators.required],
@@ -39,7 +46,10 @@ export class NoteListComponent implements OnInit {
     });
   }
 
+  // bind keyboard keys for special events
   bindKeyEvents() {
+
+    // when user press esc key while adding new note
     document.addEventListener('keyup', (e: KeyboardEvent) => {
       if (e.keyCode == 27) {
         if (this.mainService.noteService.noteItem.title && this.mainService.noteService.noteItem.note) {
@@ -51,6 +61,7 @@ export class NoteListComponent implements OnInit {
     });
   }
 
+  // get current logged in user's note data
   getNoteData() {
     let userData: any = this.mainService.getLocalStorage('loggedInUser'),
       url = '/note/' + userData.email;
@@ -61,6 +72,7 @@ export class NoteListComponent implements OnInit {
     });
   }
 
+  // add new note
   addNewNote() {
 
     // 
@@ -95,6 +107,8 @@ export class NoteListComponent implements OnInit {
     }
   }
 
+  // when user starts typing in Take a note field
+  // show create new note panel
   enableAddNewNote() {
     this.mainService.noteService.addNewCard = true;
     setTimeout(() => {
@@ -102,6 +116,7 @@ export class NoteListComponent implements OnInit {
     }, 100);
   }
 
+  // shorthand of form control for html
   get nf() {
     return this.form.controls;
   }

@@ -11,10 +11,12 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class RegisterComponent implements OnInit {
 
+  // variable
   public form;
   public isSubmitted: boolean;
   public user: any;
 
+  // Dependencies
   constructor(
     private fb: FormBuilder,
     private myRoute: Router,
@@ -22,23 +24,26 @@ export class RegisterComponent implements OnInit {
     public mainService: MainService
   ) { }
 
+  // Angular init life cycle
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
       this.myRoute.navigate(["list"]);
     }
     this.initializeData();
+    this.createForm();
   }
 
+  // init data
   initializeData() {
     this.user = {
       name: '',
       email: '',
       password: ''
     };
-    this.isSubmitted = false;
-    this.createForm();
+    this.isSubmitted = false;    
   }
 
+  // create reactive form
   createForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -47,6 +52,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  // signup user
   register() {
     this.isSubmitted = true;
     if (this.form.valid) {
@@ -67,6 +73,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  // shorthand of form controls for html
   get rf() {
     return this.form.controls;
   }

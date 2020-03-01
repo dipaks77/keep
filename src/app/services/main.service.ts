@@ -10,15 +10,18 @@ import Swal from 'sweetalert2';
 })
 export class MainService {
 
+  // variables
   public isListViewActive: boolean;
   public searchText;
 
+  // Dependencies
   constructor(
     public noteService: NoteService,
     public httpService: HttpService,
     public eventService: PubSubService
   ) { }
 
+  // set localstorage with/without json data
   setLocalStorage(key, data, isJson: boolean = true) {
     if (isJson === true) {
       data = JSON.stringify(data);
@@ -26,6 +29,7 @@ export class MainService {
     localStorage.setItem(key, data);
   }
 
+  // get localstorage with/without json data
   getLocalStorage(key, isJson: boolean = true) {
     let data = localStorage.getItem(key);
     if (isJson === true) {
@@ -34,6 +38,7 @@ export class MainService {
     return data;
   }
 
+  // to display sweetalert
   swal(title, message, type: any = 'error') {
     Swal.fire(title, message, type);
   }

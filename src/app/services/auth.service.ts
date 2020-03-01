@@ -7,24 +7,28 @@ import { MainService } from './main.service';
 })
 export class AuthService {
 
+  // Dependencies
   constructor(
     private myRoute: Router,
     public mainService: MainService
   ) { }
 
+  // set token to local storage
   sendToken(token: any) {
     this.mainService.setLocalStorage("loggedInUser", token);
-    // localStorage.setItem("LoggedInUser", token)
   }
 
+  // get token from local storage
   getToken() {
     return this.mainService.getLocalStorage("loggedInUser");
   }
 
+  // return is user logged in or not
   isLoggedIn() {
     return this.getToken() !== null;
   }
 
+  // remove token
   logout() {
     localStorage.removeItem("loggedInUser");
     this.myRoute.navigate(["login"]);
