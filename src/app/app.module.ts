@@ -1,7 +1,7 @@
 // Angular default
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // Modules
@@ -16,6 +16,7 @@ import { NoteCardComponent } from './components/note-card/note-card.component';
 import { FilterPipe } from './_helper/filter.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PubSubModule } from 'angular7-pubsub';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    PubSubModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

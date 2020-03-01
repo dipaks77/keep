@@ -8,11 +8,13 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class NoteCardComponent implements OnInit {
 
+  public fieldsToSearch;
   constructor(
     public mainService: MainService
   ) { }
 
   ngOnInit() {
+    this.fieldsToSearch = ['title', 'note'];
   }
 
   ngAfterViewInit() {

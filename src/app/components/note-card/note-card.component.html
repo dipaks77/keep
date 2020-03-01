@@ -1,9 +1,18 @@
-<div [ngClass]="mainService.isListViewActive === false ? 'display-flex' : 'display-row'">
-    <div class="card" *ngFor="let noteItem of mainService.noteService.noteData | filter: mainService.searchText">
-        <div class="card-body">
-            <button class="close" (click)='mainService.noteService.removeNote(noteItem.id)'>&times;</button>
-            <h5 class="card-title">{{noteItem?.title}}</h5>
-            <p class="card-text">{{noteItem?.noteMsg}}</p>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <ng-template *ngTemplateOutlet="noteList"></ng-template>
     </div>
 </div>
+
+
+<ng-template #noteList>
+    <div class="card" *ngFor="let noteItem of mainService.noteService.noteData | filter: mainService.searchText: fieldsToSearch; let i = index">
+        <div class="card-header">
+            <button class="close" (click)='mainService.noteService.removeNote(noteItem._id, i)'>&times;</button>
+            <h5 class="card-title">{{noteItem?.title}}</h5>
+        </div>
+        <div class="card-body" (click) = 'mainService.noteService.editNote(noteItem)'>
+            <p class="card-text">{{noteItem?.note}}</p>
+        </div>
+    </div>
+</ng-template>

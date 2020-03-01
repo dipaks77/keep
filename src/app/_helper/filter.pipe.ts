@@ -5,15 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], value: string): any[] {
+  transform(items: any[], value: string, fieldsToSearch: string[]): any[] {
     if (!value) return items;
     return items.filter(item => {
       let ret = false;
-      Object.keys(item).map(function (key) {
-        if (key != 'id') {
-          if (item[key].toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-            ret = true;
-          }
+      fieldsToSearch.filter(key => {
+        if (item[key].toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+          ret = true;
         }
       });
       return ret;
