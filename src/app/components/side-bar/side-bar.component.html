@@ -1,0 +1,27 @@
+<div class="side-bar-container">
+    <div class="row">
+
+        <div class="logo col-md-2">
+            <a class="logo-link" aria-label="Keep" href="?authuser=0" tabindex="0">
+                <img class="logo-img" src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png"
+                    srcset="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x "
+                    alt="" aria-hidden="true" style="width:40px;height:40px">
+                <span class="logo-label">Keep</span>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <input type="text" placeholder="Search note here" class="form-control" [(ngModel)]="mainService.searchText">
+        </div>
+
+        <div class="refresh-list col-md-1">
+            <div role="button" class="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe qrlFte VIpgJd-LgbsSe" tabindex="0"
+                aria-label="Refresh" style="user-select: none;"></div>
+        </div>
+
+        <div *ngIf="mainService.noteService.noteData.length" class="change-view-container col-md-1" [ngClass] = "mainService.isListViewActive === true ? 'list-view' : 'grid-view'" (click) = 'mainService.isListViewActive = !mainService.isListViewActive'>
+            <div role="button" class="list-view" tabindex="0" aria-label="List View" style="user-select: none;"></div>
+            <!-- <div role="button" class="grid-view" tabindex="0" aria-label="Grid View" style="user-select: none;"> </div>-->
+        </div>
+    </div>
+</div>

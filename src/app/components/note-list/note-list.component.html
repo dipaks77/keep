@@ -1,0 +1,21 @@
+<div class="container">
+
+    <div class="card col-md-5"  [attr.hidden]='addNewCard === true ? null : true'>
+        <div class="card-body">
+            <input type="text" placeholder="Title" class="form-control" [(ngModel)]='noteTitle'>
+            <input #takeNewNote type="text" class="form-control" placeholder="Take a note" [(ngModel)]='noteMsg'>
+            <button class="btn btn-primary" type="button" (click)='addNewNote()'>Add</button>
+        </div>
+    </div>
+    <input type="text" class="form-control col-md-5" placeholder="Take a note" [(ngModel)]='noteMsg' *ngIf="addNewCard === false" (input)='enableAddNewNote()'>
+    <div *ngIf="!mainService.noteService.noteData.length" class="no-notes-container">
+        <div class="image"></div>
+        <div class="label">Notes you add appear here</div>
+    </div>
+
+    <ng-container *ngIf="mainService.noteService.noteData.length">
+
+        <note-card (removeNote)="removeNoteData($event)"></note-card>
+
+    </ng-container>
+</div>

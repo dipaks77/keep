@@ -1,0 +1,9 @@
+<div [ngClass]="mainService.isListViewActive === false ? 'display-flex' : 'display-row'">
+    <div class="card" *ngFor="let noteItem of mainService.noteService.noteData| filter: mainService.searchText">
+        <div class="card-body">
+            <button class="close" (click)='mainService.noteService.removeNote(noteItem.id)'>&times;</button>
+            <h5 class="card-title">{{noteItem?.title}}</h5>
+            <p class="card-text">{{noteItem?.noteMsg}}</p>
+        </div>
+    </div>
+</div>
