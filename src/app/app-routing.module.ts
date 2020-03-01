@@ -4,7 +4,7 @@ import { NoteListComponent } from './components/note-list/note-list.component';
 
 
 const routes: Routes = [
-  { path: '*', redirectTo: 'list' },
+  { path: '', redirectTo: 'list',pathMatch:'full' },
   { path: 'list', component: NoteListComponent }
 ];
 

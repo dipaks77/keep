@@ -5,18 +5,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], args: any[]): any[] {
-    if (!items) return [];
-    if (!args || !args.length) return items;
-    // if (!searchText) return items;
-    // searchText = searchText.toLowerCase();
-    return items.filter(item => item.id.indexOf(args[0]) !== -1);
-    // return items.filter(it => {
-    //   for (let key in it) {
-
-    //     return it[key].toLowerCase().includes(searchText);
-    //   }
-    // });
+  transform(items: any[], value: string): any[] {
+    if (!value) return items;
+    return items.filter(item => {
+      let ret = false;
+      Object.keys(item).map(function (key) {
+        if (key != 'id') {
+          if (item[key].toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+            ret = true;
+          }
+        }
+      });
+      return ret;
+    });
   }
 
 }
