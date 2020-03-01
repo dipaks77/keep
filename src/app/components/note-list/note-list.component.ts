@@ -24,25 +24,18 @@ export class NoteListComponent implements OnInit {
   initializeNoteData() {
     this.noteMsg = '';
     this.addNewCard = false;
-    this.mainService.noteService.noteData.push(
-      {
-        id: 1,
-        title: 'Test title',
-        noteMsg: 'Sample Note'
-      },
-      {
-        id: 2,
-        title: 'New List',
-        noteMsg: 'Sample Note'
-      }
-    );
+    this.mainService.httpService.get('assets/json/noteData.json').then(jsonData => {
+
+    }).catch(err => {
+      console.log("Error in fetching json data: ", err);
+    });
     this.bindKeyEvents();
   }
 
   bindKeyEvents() {
     document.addEventListener('keyup', (e: KeyboardEvent) => {
       if (e.keyCode == 27) {
-        if(this.noteTitle && this.noteMsg) {
+        if (this.noteTitle && this.noteMsg) {
           this.addNewNote();
         } else {
           this.addNewCard = false;
@@ -53,13 +46,12 @@ export class NoteListComponent implements OnInit {
   }
 
   addNewNote() {
-    this.mainService.noteService.noteData.push(
-      {
-        id: this.mainService.noteService.noteData.length,
-        title: this.noteTitle,
-        noteMsg: this.noteMsg
-      }
-    );
+    const jsonObject = {
+      id: this.mainService.noteService.noteData.length,
+      title: this.noteTitle,
+      noteMsg: this.noteMsg
+    };
+    this.mainService.noteService.noteData.push(jsonObject);
     this.noteTitle = '';
     this.noteMsg = '';
     this.addNewCard = false;

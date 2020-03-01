@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,8 @@ import { CreateNoteComponent } from './components/create-note/create-note.compon
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { NoteCardComponent } from './components/note-card/note-card.component';
 import { FilterPipe } from './_helper/filter.pipe';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,15 @@ import { FilterPipe } from './_helper/filter.pipe';
     CreateNoteComponent,
     SideBarComponent,
     NoteCardComponent,
-    FilterPipe
+    FilterPipe,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [    
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
