@@ -90,17 +90,21 @@ export class NoteListComponent implements OnInit {
     // 
     if (this.mainService.noteService.noteItem.hasOwnProperty('_id')) {
       url += '/' + this.mainService.noteService.noteItem['_id'];
-      this.mainService.httpService.put(url, this.mainService.noteService.noteItem).then(resp => {
-        this.mainService.noteService.noteData.push(this.mainService.noteService.noteItem);
-        this.initializeNoteData();
+      this.mainService.httpService.put(url, this.mainService.noteService.noteItem).then((resp: any) => {
+        if (resp && resp.status == 'success') {
+          this.mainService.noteService.noteData.push(resp.data);
+          this.initializeNoteData();
+        }
       }).catch(err => {
         console.log("Error in creating note: ", err);
       });
     } else {
       this.mainService.noteService.noteItem.email = userData.email;
-      this.mainService.httpService.post(url, this.mainService.noteService.noteItem).then(resp => {
-        this.mainService.noteService.noteData.push(this.mainService.noteService.noteItem);
-        this.initializeNoteData();
+      this.mainService.httpService.post(url, this.mainService.noteService.noteItem).then((resp: any) => {
+        if (resp && resp.status == 'success') {
+          this.mainService.noteService.noteData.push(resp.data);
+          this.initializeNoteData();
+        }
       }).catch(err => {
         console.log("Error in creating note: ", err);
       });
